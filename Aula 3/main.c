@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "vc.h"
+#include <stdlib.h>
 
 // // gray to
 int main1()
@@ -129,13 +130,13 @@ int main3()
 }
 
 // // rbg para tons de cinza
-int main4()
+int main()
 {
     IVC *src, *dst;
     int x, y, resposta;
     long int pos;
 
-    src = vc_read_image("../Images/Classic/airplane.ppm");
+    src = vc_read_image("../Images/Additional/fruits.ppm");
     dst = vc_image_new(src->width, src->height, 1, src->levels);
     if (src == NULL)
     {
@@ -152,6 +153,10 @@ int main4()
         return 0;
     }
     vc_write_image("red_to_gray.pgm", dst);
+
+        // Windows
+	system("cmd /c start  FilterGear ../Images/Additional/fruits.ppm"); // Input
+	system("FilterGear red_to_gray.pgm"); // Output
 
     vc_image_free(src);
     vc_image_free(dst);
@@ -185,7 +190,9 @@ int main5()
         vc_write_image("rgb_to_hsv.hsv", dst);
     }
 
-    teste(78, 99, 204);
+    // Windows
+    system("FilterGear .../Images/Classic/baboon.ppm"); // Input
+    system("FilterGear hrgb_to_hsv.hsv");               // Output
 
     vc_image_free(src);
     vc_image_free(dst);
@@ -208,7 +215,7 @@ int main6()
     int x, y, resposta;
     long int pos;
 
-    src = vc_read_image("../Images/Classic/baboon.ppm");
+    src = vc_read_image("../Images/HSVTestImage01.ppm");
     dst = vc_image_new(src->width, src->height, 1, src->levels);
     if (src == NULL)
     {
@@ -224,6 +231,10 @@ int main6()
         vc_write_image("hsv_degmentation.pgm", dst);
     }
 
+    // Windows
+    system("FilterGear ../Images/HSVTestImage01.ppm"); // Input
+    system("FilterGear hsv_degmentation.pgm");         // Output
+
     vc_image_free(src);
     vc_image_free(dst);
 
@@ -233,7 +244,7 @@ int main6()
     return 0;
 }
 
-int main()
+int main7()
 {
     IVC *src, *dst;
     int x, y, resposta;
@@ -254,6 +265,10 @@ int main()
     {
         vc_write_image("new_rbg.ppm", dst);
     }
+
+    // Windows
+    system("cmd /c start FilterGear ../Images/FLIR/flir-01.pgm"); // Input
+    system("FilterGear new_rbg.ppm");         // Output
 
     vc_image_free(src);
     vc_image_free(dst);
