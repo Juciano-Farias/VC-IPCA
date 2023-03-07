@@ -21,6 +21,10 @@ int main1()
 
     vc_write_image("teste_gray.ppm", image);
 
+    // Windows
+    system("cmd /c start  FilterGear ../Images/FLIR/flir-01.pgm"); // Input
+    system("FilterGear teste_gray.ppm");                           // Output
+
     vc_image_free(image);
 
     printf("Press any key to exit...\n");
@@ -47,6 +51,10 @@ int main2()
     vc_rbg_negative(image);
 
     vc_write_image("teste_colorido.ppm", image);
+
+    // Windows
+    system("cmd /c start  FilterGear ../Images/Classic/airplane.ppm"); // Input
+    system("FilterGear teste_colorido.ppm");                               // Output
 
     vc_image_free(image);
 
@@ -130,7 +138,7 @@ int main3()
 }
 
 // // rbg para tons de cinza
-int main()
+int main4()
 {
     IVC *src, *dst;
     int x, y, resposta;
@@ -154,9 +162,9 @@ int main()
     }
     vc_write_image("red_to_gray.pgm", dst);
 
-        // Windows
-	system("cmd /c start  FilterGear ../Images/Additional/fruits.ppm"); // Input
-	system("FilterGear red_to_gray.pgm"); // Output
+    // Windows
+    system("cmd /c start  FilterGear ../Images/Additional/fruits.ppm"); // Input
+    system("FilterGear red_to_gray.pgm");                               // Output
 
     vc_image_free(src);
     vc_image_free(dst);
@@ -174,7 +182,7 @@ int main5()
     int x, y, resposta;
     long int pos;
 
-    src = vc_read_image("../Images/Classic/baboon.ppm");
+    src = vc_read_image("../Images/Classic/airplane.ppm");
     dst = vc_image_new(src->width, src->height, 3, 255);
     if (src == NULL)
     {
@@ -187,12 +195,12 @@ int main5()
 
     if (resposta == 1)
     {
-        vc_write_image("rgb_to_hsv.hsv", dst);
+        vc_write_image("rgb_to_hsv.ppm", dst);
     }
 
     // Windows
-    system("FilterGear .../Images/Classic/baboon.ppm"); // Input
-    system("FilterGear hrgb_to_hsv.hsv");               // Output
+    system("cmd /c start FilterGear ../Images/Classic/airplane.ppm"); // Input
+    system("FilterGear hrgb_to_hsv.ppm");               // Output
 
     vc_image_free(src);
     vc_image_free(dst);
@@ -209,7 +217,7 @@ Essa função deverá receber ainda os intervalos de valores da Matiz
 (H), Saturação (S) e Brilho (V) da cor que se pretende segmentar. A
 imagem de saída deverá apresentar a branco (255) os pixéis que
 estão dentro desse intervalo, e a preto (0) todos os outros.*/
-int main6()
+int main()
 {
     IVC *src, *dst;
     int x, y, resposta;
@@ -224,7 +232,7 @@ int main6()
         return 0;
     }
 
-    resposta = vc_hsv_segmentation(src, dst, 50, 60, 90, 100, 5, 40);
+    resposta = vc_hsv_segmentation(src, dst, 0, 255, 0, 255, 0, 100);
 
     if (resposta == 1)
     {
@@ -232,7 +240,7 @@ int main6()
     }
 
     // Windows
-    system("FilterGear ../Images/HSVTestImage01.ppm"); // Input
+    system("cmd /c start FilterGear ../Images/HSVTestImage01.ppm"); // Input
     system("FilterGear hsv_degmentation.pgm");         // Output
 
     vc_image_free(src);
@@ -268,7 +276,7 @@ int main7()
 
     // Windows
     system("cmd /c start FilterGear ../Images/FLIR/flir-01.pgm"); // Input
-    system("FilterGear new_rbg.ppm");         // Output
+    system("FilterGear new_rbg.ppm");                             // Output
 
     vc_image_free(src);
     vc_image_free(dst);
